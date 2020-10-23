@@ -1,23 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <BotList />
   </div>
 </template>
 
 <script>
+import BotList from './components/BotList';
+  export default {
+    name: 'App',
 
-export default {
-  name: 'App',
-}
+    components: {
+      BotList
+    }
+  }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
