@@ -1,14 +1,20 @@
 <template>
-  <div>
+  <div class="add-bot">
+
+    <div class="add-bot__header">
+    </div>
+
     <form
       action=""
       method="POST"
       v-on:submit.prevent=""
+      class="add-bot__form"
     >
       <input type="text">
       <input type="text">
       <input type="image">
       <input type="date">
+
       <button>Submit</button>
     </form>
 
@@ -21,6 +27,16 @@
   }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
+  .add-bot {
+    position: absolute;
+    top: 50px;
 
+    background-color: #000;
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 </style>

@@ -1,11 +1,6 @@
 <template>
   <div>
-    <p>
-      {{ bot.description }}
-    </p>
-    <p>
-      {{ bot.author }}
-    </p>
+
   </div>
 </template>
 
@@ -18,5 +13,5 @@
 </script>
 
 <style lang="stylus" scoped>
-
+  
 </style>
