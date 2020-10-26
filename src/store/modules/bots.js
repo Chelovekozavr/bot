@@ -18,11 +18,11 @@ export default {
   },
 
   mutations: {
-    ADD_CONTACT_TO_STATE(state, newBot) {
+    ADD_BOT_TO_STATE(state, newBot) {
       state.bots.push(newBot);
     },
 
-    DELETE_CONTACT_FROM_STATE(state, id) {
+    DELETE_BOT_FROM_STATE(state, id) {
       state.bots = state.bots.filter(bot => bot.id !== id);
     },
   }

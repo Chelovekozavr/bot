@@ -38,6 +38,8 @@
     </ul>
     <BotListItemAdd
       v-if="botAddFormVisibility"
+      @cancel-add="addBot"
+      @add-bot="submitAdding"
     />
   </div>
 
@@ -64,8 +66,8 @@
 
     methods: {
       ...mapMutations([
-        'ADD_CONTACT_TO_STATE',
-        'DELETE_CONTACT_FROM_STATE'
+        'ADD_BOT_TO_STATE',
+        'DELETE_BOT_FROM_STATE'
       ]),
 
       addBot() {
@@ -73,7 +75,11 @@
       },
 
       deleteBot(id) {
-        this.DELETE_CONTACT_FROM_STATE(id)
+        this.DELETE_BOT_FROM_STATE(id)
+      },
+
+      submitAdding(newBot) {
+        console.log(newBot)
       }
     }
 

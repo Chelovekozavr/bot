@@ -2,20 +2,58 @@
   <div class="add-bot">
 
     <div class="add-bot__header">
+      <h3 class="add-bot__title">
+        Add new bot
+      </h3>
+      <button
+        class="add-bot__close-button"
+        @click="$emit('cancel-add')"
+      >
+        X
+      </button>
     </div>
 
     <form
       action=""
       method="POST"
-      v-on:submit.prevent=""
+      v-on:submit.prevent="$emit('add-bot', newBot)"
       class="add-bot__form"
     >
-      <input type="text">
-      <input type="text">
-      <input type="image">
-      <input type="date">
+      <input
+        type="text"
+        placeholder="Enter bot name"
+        class="add-bot__form-item"
+        :name="name"
+        @input="addName(name)"
+        required
+      >
+      <input
+        type="text"
+        placeholder="Write short description"
+        maxlength="50"
+        class="add-bot__form-item"
+        :name="description"
+        @change="addDescription(description)"
+        required
+      >
+      <input
+        type="date"
+        :value="date"
+        class="add-bot__form-item"
+        :name="date"
+        @change="addDate(date)"
+        required
+      >
+      <input
+        type="image"
+        class="add-bot__form-item"
+        :name="image"
+        @change="addImage(image)"
+      >
 
-      <button>Submit</button>
+      <button class="add-bot__submit-button">
+        Submit
+      </button>
     </form>
 
   </div>
@@ -23,6 +61,38 @@
 
 <script>
   export default {
+    data() {
+      return {
+        date: new Date().toISOString().substring(0, 10),
+        newBot: {
+          name: 'ewqr',
+          description: '',
+          date: null,
+          image: null
+
+        }
+      }
+    },
+
+    methods: {
+      addName(name) {
+        console.log(this.newBot.name)
+        this.newBot.name = name;
+        console.log(this.newBot.name)
+      },
+
+      addDescription(description) {
+        this.newBot.description = description;
+      },
+
+      addDate(date) {
+        this.newBot.date = date;
+      },
+
+      addImage(image) {
+        this.newBot.image = image;
+      },
+    }
     
   }
 </script>
@@ -31,12 +101,112 @@
   .add-bot {
     position: absolute;
     top: 50px;
+    padding: 30px;
 
-    background-color: #000;
+    width: calc(60% - 60px);
+    max-width: 1000px;
+
+    background-color: #76787a;
+    box-shadow: 0 5px 1000px 1000px rgba(0,0,0, 0.75);
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+
+      text-transform: uppercase;
+      font-weight: bold;
+      position: relative;
+      color: #6Ba2e0;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 3px;
+        background-color: whitesmoke;
+        z-index: 10;
+      }
+    }
+
+    &__title {
+      position: relative;
+      font-size: 20px;
+
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 3px;
+        color: whitesmoke;
+      }
+    }
+
+    &__close-button {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+
+      background-color: #76787a;
+      color: #fff;
+      border: none;
+      outline: none;
+
+      font-weight: bold;
+      font-size: 20px;
+      transition: background-color 0.5s ease,
+        transform 0.5s ease;
+
+      &:hover {
+        background-color: #6a6c6e;
+      }
+
+      &:active {
+        transform: scale(0.9);
+      }
+    }
 
     &__form {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+    }
+
+    &__form-item {
+      height: 40px;
+      width: 45%;
+      margin-bottom: 10px;
+    }
+
+    &__submit-button {
+      height: 50px;
+      width: 200px;
+      margin: 0 auto;
+
+      background-color: #5d5f61;
+      color: #fff;
+      border: none;
+
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 18px;
+      letter-spacing: .1rem;
+
+      transition: background-color 0.5s ease,
+        transform 0.5s ease;
+
+      &:hover {
+        background-color: #979a9c;
+      }
+
+      &:active {
+        transform: scale(0.9);
+      }
     }
   }
 </style>
