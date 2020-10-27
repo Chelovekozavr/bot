@@ -1,41 +1,47 @@
 <template>
   <div class="bot-list">
+    <header class="bot-list__header">
+      <h1 class="bot-list__title">
+        Bot list
+      </h1>
+      <button
+        @click="addBot"
+        class="bot-list__add-button"
+      >
+        Add bot
+      </button>
+    </header>
     <ul>
-      <li>
-        <button
-          @click="addBot"
-          class="bot-list__add-button"
-        >
-          Add bot
-        </button>
-      </li>
       <li
         v-for="bot in getBots"
         :key="bot.id"
         class="bot-list__item"
+        @click="handleEditBot(bot)"
       >
       <span class="bot-list__item-title">
         {{ bot.name }}
       </span>
       <span>
-        {{ bot.email }}
-      </span>
-      <span>
-        {{ bot.author }}
-      </span>
-      <span>
         {{ bot.description }}
       </span>
-        <BotListItemEdit
-          :bot="bot"
-        />
+      <span>
+        {{ bot.date }}
+      </span>
+
         <button
-          @click="deleteBot(bot.id)"
+          @click.stop="deleteBot(bot.id)"
           class="bot-list__delete-bot"
 
         >X</button>
       </li>
     </ul>
+
+    <BotListItemEdit
+      v-if="editFormVisibility"
+      :bot="bot"
+      @cancel-edit="editBot"
+    />
+
     <BotListItemAdd
       v-if="botAddFormVisibility"
       @cancel-add="addBot"
@@ -53,7 +59,9 @@
   export default {
     data() {
       return {
-        botAddFormVisibility: false
+        botAddFormVisibility: false,
+        editFormVisibility: false,
+        bot: null
       }
     },
 
@@ -79,7 +87,19 @@
       },
 
       submitAdding(newBot) {
+        this.addBot();
+        this.ADD_BOT_TO_STATE(newBot)
         console.log(newBot)
+      },
+
+      editBot() {
+        this.editFormVisibility = !this.editFormVisibility;
+      },
+
+      handleEditBot(bot) {
+        this.editBot();
+        this.bot = bot;
+        console.log(this.bot)
       }
     }
 
@@ -96,6 +116,37 @@
 
     box-shadow: 0 5px 50px 25px rgba(0,0,0, 0.75);
     background-color: #454647;
+
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 18px;
+      letter-spacing: .1rem;
+    }
+
+    &__title {
+      position: relative;
+
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 30px;
+      letter-spacing: .1rem;
+
+      &::after {
+        position: absolute;
+        content: '';
+        bottom: -10px;
+        left: 0;
+        width: 80%;
+        height: 3px;
+        background-color: whitesmoke;
+
+      }
+    }
 
     &__item {
       display: flex;

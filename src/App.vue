@@ -28,6 +28,10 @@ import BotList from './components/BotList';
     margin: 0;
   }
 
+  h1, h2, h3 {
+    margin: 0;
+  }
+
   #app {
     display: flex;
     justify-content: center;

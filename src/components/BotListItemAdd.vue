@@ -23,8 +23,8 @@
         type="text"
         placeholder="Enter bot name"
         class="add-bot__form-item"
-        :name="name"
-        @input="addName(name)"
+        v-model.trim="name"
+        @change="addName(name)"
         required
       >
       <input
@@ -32,15 +32,15 @@
         placeholder="Write short description"
         maxlength="50"
         class="add-bot__form-item"
-        :name="description"
+        v-model.trim="description"
         @change="addDescription(description)"
         required
       >
       <input
         type="date"
-        :value="date"
         class="add-bot__form-item"
-        :name="date"
+        :value="date"
+
         @change="addDate(date)"
         required
       >
@@ -51,7 +51,10 @@
         @change="addImage(image)"
       >
 
-      <button class="add-bot__submit-button">
+      <button
+        class="add-bot__submit-button"
+        @click="addNewBot"
+      >
         Submit
       </button>
     </form>
@@ -63,35 +66,43 @@
   export default {
     data() {
       return {
-        date: new Date().toISOString().substring(0, 10),
-        newBot: {
-          name: 'ewqr',
-          description: '',
-          date: null,
-          image: null
+          newBot: {
 
-        }
+          },
+
+          name: '',
+          description: '',
+          date: new Date().toISOString().substring(0, 10),
+          image: null
       }
     },
 
     methods: {
       addName(name) {
-        console.log(this.newBot.name)
-        this.newBot.name = name;
-        console.log(this.newBot.name)
+        this.name = name;
       },
 
       addDescription(description) {
-        this.newBot.description = description;
+        this.description = description;
       },
 
       addDate(date) {
-        this.newBot.date = date;
+        this.date = date;
+        console.log(date, this.date)
       },
 
       addImage(image) {
-        this.newBot.image = image;
+        this.image = image;
       },
+
+      addNewBot() {
+        this.newBot = {
+          name: this.name,
+          description: this.description,
+          date: this.date,
+          image: this.image
+        }
+      }
     }
     
   }
