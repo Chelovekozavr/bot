@@ -17,12 +17,12 @@
       action=""
       method="POST"
       class="add-bot__form"
-      @submit.prevent=""
+      @submit.prevent="$emit('submit-editing', botToEdit)"
     >
       <input
         type="text"
         class="add-bot__form-item"
-        v-model="bot.name"
+        v-model="botToEdit.name"
         @change="addName()"
         required
       >
@@ -30,14 +30,14 @@
         type="text"
         maxlength="50"
         class="add-bot__form-item"
-        v-model.trim="bot.description"
+        v-model.trim="botToEdit.description"
         @change="addDescription(description)"
         required
       >
       <input
         type="date"
         class="add-bot__form-item"
-        v-model="bot.date"
+        v-model="botToEdit.date"
         @change="addDate(date)"
         required
       >
@@ -64,16 +64,14 @@
       bot: Object
     },
 
-    date() {
+    data() {
       return {
-        botToEdit: { ...this.props.bot }
+        botToEdit: { ...this.bot }
       }
     },
 
     methods: {
-      addName(name) {
-        console.log(name)
-      }
+
     }
   }
 </script>

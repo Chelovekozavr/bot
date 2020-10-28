@@ -97,6 +97,7 @@
 
       addNewBot() {
         this.newBot = {
+          id: Date.now(),
           name: this.name,
           description: this.description,
           date: this.date,

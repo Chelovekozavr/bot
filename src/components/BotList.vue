@@ -32,7 +32,10 @@
           @click.stop="deleteBot(bot.id)"
           class="bot-list__delete-bot"
 
-        >X</button>
+        >
+          X
+        </button>
+
       </li>
     </ul>
 
@@ -40,6 +43,7 @@
       v-if="editFormVisibility"
       :bot="bot"
       @cancel-edit="editBot"
+      @submit-editing="submitEditing"
     />
 
     <BotListItemAdd
@@ -75,7 +79,8 @@
     methods: {
       ...mapMutations([
         'ADD_BOT_TO_STATE',
-        'DELETE_BOT_FROM_STATE'
+        'DELETE_BOT_FROM_STATE',
+        'EDIT_BOT_IN_STATE'
       ]),
 
       addBot() {
@@ -88,8 +93,7 @@
 
       submitAdding(newBot) {
         this.addBot();
-        this.ADD_BOT_TO_STATE(newBot)
-        console.log(newBot)
+        this.ADD_BOT_TO_STATE(newBot);
       },
 
       editBot() {
@@ -99,10 +103,13 @@
       handleEditBot(bot) {
         this.editBot();
         this.bot = bot;
-        console.log(this.bot)
+      },
+
+      submitEditing(editedBot) {
+        this.DELETE_BOT_FROM_STATE(editedBot.id)
+        this.ADD_BOT_TO_STATE(editedBot);
       }
     }
-
   }
 </script>
 

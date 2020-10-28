@@ -9,7 +9,7 @@ export default {
 
   getters: {
     getBots(state) {
-      return state.bots
+      return state.bots.sort((a, b) => a.id - b.id);
     },
 
     getBotById: (state) => (id) => {
